@@ -2,15 +2,26 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.ConfigReader;
+
 import java.util.*;
 
 public class DropdownPage extends BasePage {
+    public DropdownPage(WebDriver driver) {
+        super(driver);
+    }
+
     private By autocompleteInput = By.xpath("//kendo-autocomplete//input");
     private By clearAutocompleteBtn = By.xpath("//kendo-autocomplete//span[contains(@class,'k-clear-value')]");
     private By multiSelectInput = By.xpath("//kendo-multiselect//input");
     private By selectedMulti = By.cssSelector("kendo-multiselect .k-chip-list .k-chip");
     private By closeSelectionButton = By.xpath("//div[contains(@class,'k-input-values')]//span[contains(@aria-label,'delete')]");
+
+    public void navigateToDropdownPage() {
+        navigateTo(ConfigReader.get("dropdownPath"));
+    }
 
     public void typeAndSelectFavouriteSport(String sport) {
         WebElement input = waitVisible(autocompleteInput);
@@ -51,6 +62,4 @@ public class DropdownPage extends BasePage {
             input.sendKeys(Keys.ENTER);
         }
     }
-
-
 }

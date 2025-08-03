@@ -2,20 +2,15 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.BasePage;
 import pages.DialogPage;
 import pages.WindowPage;
 
 public class DialogTest extends BaseTest {
-    DialogPage dialog = new DialogPage();
-    WindowPage window = new WindowPage();
-    BasePage bp = new BasePage();
-
-    private String dialogPath = "/kendo-angular-ui/demos/dialogs/preview?theme=default-main";
 
     @Test(description = "Verify dialog window elements and actions.")
     public void shouldVerifyDialogWindowAndActions() {
-        bp.navigateTo(dialogPath);
+        DialogPage dialog = new DialogPage(driver);
+        dialog.navigateToDialogPage();
         dialog.openDialog();
         Assert.assertTrue(dialog.isDialogVisible(), "Dialog should be visible after Open Dialog click.");
         Assert.assertTrue(dialog.hasAllElements(), "All expected elements should be present.");
@@ -27,7 +22,9 @@ public class DialogTest extends BaseTest {
 
     @Test(description = "Verify data form window and maximize/close actions.")
     public void shouldValidateDataFormWindowActions() {
-        bp.navigateTo(dialogPath);
+        WindowPage window = new WindowPage(driver);
+        DialogPage dialog = new DialogPage(driver);
+        dialog.navigateToDialogPage();
         window.openWindow();
         Assert.assertTrue(window.isWindowVisible(), "Window should be visible after click.");
         Assert.assertTrue(window.hasContentField(), "Content field should be present.");

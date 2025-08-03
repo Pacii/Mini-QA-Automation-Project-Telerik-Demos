@@ -8,13 +8,13 @@ import factories.DriverFactory;
 public class BaseTest {
     protected WebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() {
         driver = DriverFactory.createDriver();
-        BasePage.setDriver(driver);
+        driver.manage().window().maximize();
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         if (driver != null) driver.quit();
     }

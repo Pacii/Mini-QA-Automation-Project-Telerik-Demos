@@ -1,9 +1,14 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class WindowPage extends BasePage {
+    public WindowPage(WebDriver driver) {
+        super(driver);
+    }
+
     private By openWindowBtn = By.xpath("//button//span[contains(text(),'Open window')]");
     private By window = By.cssSelector(".k-window");
     private By titleField = By.xpath("//span[contains(@class,'k-window-title')]");

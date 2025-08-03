@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.BasePage;
 import pages.GridPage;
+import utils.ConfigReader;
 import utils.ExcelUtil;
 
 import java.io.File;
@@ -11,14 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class GridTest extends BaseTest {
-    GridPage grid = new GridPage();
-    BasePage bp = new BasePage();
 
-    private String gridPath = "/kendo-angular-ui/demos/grid/filter-all-columns?theme=default-main";
 
     @Test(description = "Export all online USA employees to Excel and verify export is correct")
-    public void shouldExportAndVerifyOnlineUsaEmployeesToExcel() throws Exception {
-        bp.navigateTo(gridPath);
+    public void exportAndVerifyOnlineUsaEmployeesToExcel() throws Exception {
+        GridPage grid = new GridPage(driver);
+        grid.navigateToGridPage();
         List<Map<String, String>> usa = grid.getUsaEmployeesAllPages();
 
         List<Map<String, String>> onlyOnline = grid.getOnlineUsaEmployees(usa);

@@ -2,21 +2,18 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.BasePage;
 import pages.DropdownPage;
+import utils.ConfigReader;
 
 import java.util.List;
 
 public class DropdownTest extends BaseTest {
-    DropdownPage dropdown = new DropdownPage();
-    BasePage bp = new BasePage();
-
-    private String dropdownPath = "/kendo-angular-ui/demos/dropdowns/overview?theme=default-main";
 
     @Test(description = "Select and clear favourite sport using autocomplete.")
-        public void shouldSelectAndClearFavouriteSportUsingAutocomplete() {
-        bp.navigateTo(dropdownPath);
-        String sport = "Cricket";
+        public void selectAndClearFavouriteSportUsingAutocomplete() {
+        DropdownPage dropdown = new DropdownPage(driver);
+        dropdown.navigateToDropdownPage();
+        String sport = ConfigReader.get("sport1");
         dropdown.typeAndSelectFavouriteSport(sport);
         Assert.assertEquals(dropdown.getSelectedAutocompleteSport(), sport, "Chosen sport should match.");
         dropdown.clearAutoCompleteSport();
@@ -24,10 +21,11 @@ public class DropdownTest extends BaseTest {
     }
 
     @Test(description = "Clear all selections, then select Tennis and Football in multiselect dropdown and verify.")
-    public void shouldClearThenSelectMultipleSportsInMultiSelectDropdown() {
-        String sport1 = "Tennis";
-        String sport2 = "Football";
-        bp.navigateTo(dropdownPath);
+    public void clearThenSelectMultipleSportsInMultiSelectDropdown() {
+        DropdownPage dropdown = new DropdownPage(driver);
+        String sport1 = ConfigReader.get("sport1");
+        String sport2 = ConfigReader.get("sport2");
+        dropdown.navigateToDropdownPage();
         dropdown.openMultiSelectDropdown();
         dropdown.clearAllMultiSelected();
         dropdown.selectMultiSportsByEnter(sport1, sport2);

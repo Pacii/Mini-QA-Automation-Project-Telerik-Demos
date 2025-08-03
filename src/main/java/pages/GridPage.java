@@ -3,12 +3,22 @@ package pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.ConfigReader;
+
 import java.time.Duration;
 import java.util.*;
 
 public class GridPage extends BasePage {
+    public GridPage(WebDriver driver) {
+        super(driver);
+    }
+
     private final By tableRows = By.cssSelector("table.k-table > tbody > tr");
     private final By pagerNext = By.cssSelector("button[aria-label='Go to the next page']");
+
+    public void navigateToGridPage() {
+        navigateTo(ConfigReader.get("gridPath"));
+    }
 
     public List<Map<String, String>> getUsaEmployeesAllPages() {
         List<Map<String, String>> usa = new ArrayList<>();

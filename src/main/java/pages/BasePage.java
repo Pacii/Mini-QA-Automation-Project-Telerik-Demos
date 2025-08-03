@@ -2,20 +2,19 @@ package pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
+import utils.ConfigReader;
+
 import java.time.Duration;
 import java.util.List;
 
-public class BasePage {
-    protected static WebDriver driver;
-    protected static WebDriverWait wait;
-    protected final String BASE_URL = "https://demos.telerik.com";
+public abstract class BasePage {
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected final String BASE_URL = ConfigReader.get("baseUrl");
 
-    public BasePage() {
-    }
-
-    public static void setDriver(WebDriver driverInstance) {
-        driver = driverInstance;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public void navigateTo(String subPath) {
